@@ -1,0 +1,17 @@
+plugins {
+    id 'java'
+}
+
+repositories {
+    maven {
+        name = 'oss-sonatype-public'
+        url = 'https://oss.sonatype.org/content/groups/public/'
+    }
+}
+
+dependencies {
+    rootProject.dependencies {}
+    deobfCompile ('com.almuradev:malisiscore:1.12.2-6.5.0-SNAPSHOT') {
+        transitive = false
+    }
+}

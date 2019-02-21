@@ -1,0 +1,42 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        maven {
+            name = 'forge'
+            url = 'http://files.minecraftforge.net/maven/'
+        }
+        maven {
+            url = 'https://plugins.gradle.org/m2/'
+        }
+    }
+    dependencies {
+        classpath 'com.github.jengelman.gradle.plugins:shadow:2.0.4'
+        classpath 'gradle.plugin.net.minecrell:licenser:0.4.1'            
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-+'
+    }
+}
+
+apply plugin: 'net.minecraftforge.gradle.forge'
+
+minecraft {
+    version = "${project.forgeVersion}"
+    mappings = project.mcpMappings
+    runDir = 'run'
+    useDepAts = true
+
+    makeObfSourceJar = false
+}
+
+deobfMcMCP {
+    failOnAtError = false
+}
+deobfMcSRG {
+    failOnAtError = false
+}
+
+subprojects {
+    apply plugin: 'net.minecrell.licenser'
+    apply plugin: 'com.github.johnrengelman.shadow'
+    
+    defaultTasks 'licenseFormat', 'build'
+}
